@@ -39,7 +39,7 @@ class ws_m_1623926285_discount_mark_property_add extends \WS\ReduceMigrations\Sc
      **/
     public function commit() {
         $builder = new IblockBuilder();
-        $builder->updateIblock(26, function (Iblock $iblock) {
+        $builder->updateIblock(0, function (Iblock $iblock) { /** Необходимо заменить ID инфоблока каталога */
             $prop = $iblock->addProperty("Скидка")
                 ->code("DISCOUNT")
                 ->sort(1000)
