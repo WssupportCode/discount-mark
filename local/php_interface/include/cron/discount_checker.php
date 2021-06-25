@@ -7,13 +7,18 @@ use Bitrix\Main\Loader;
 Loader::includeModule("iblock");
 Loader::includeModule("catalog");
 
-$prices = \CIBlockPriceTools::GetCatalogPrices(0, array("BASE")); /** Необходимо заменить ID инфоблока каталога */
+$iblockId = 0;              /** Необходимо заменить ID инфоблока каталога */
+$arPrice = array("BASE");   /** Необходимо указать необходимые типы цен */
+$userGroups = array(2);     /** Необходимо указать группы пользователей */
+$siteId = 's1';             /** Необходимо указать SITE_ID */
+
+$prices = \CIBlockPriceTools::GetCatalogPrices($iblockId, $arPrice);
 $select = [
     "ID",
     "IBLOCK_ID",
 ];
 $filter = [
-    "IBLOCK_ID" => 0, /** Необходимо заменить ID инфоблока каталога */
+    "IBLOCK_ID" => $iblockId,
 ];
 
 foreach ($prices as $value) {
@@ -36,7 +41,7 @@ while ($item = $elementsIterator->Fetch()) {
     $elements[] = $item;
 }
 foreach ($elements as & $element) {
-    $element["PRICES"] = $optimalPrice = \CCatalogProduct::GetOptimalPrice($element["ID"], 1, array(2), 'N', array(), 's1', array());
+    $element["PRICES"] = $optimalPrice = \CCatalogProduct::GetOptimalPrice($element["ID"], 1, $userGroups, 'N', array(), $siteId, array());
 }
 
 foreach ($elements as $el) {

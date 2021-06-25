@@ -38,9 +38,12 @@ class ws_m_1623926285_discount_mark_property_add extends \WS\ReduceMigrations\Sc
      * Write action by apply scenario. Use method `setData` for save need rollback data
      **/
     public function commit() {
+        $iblockId = 0;      /** Необходимо заменить ID инфоблока каталога */
+        $name = "Скидка";   /** Необходимо указать наименование свойства */
+
         $builder = new IblockBuilder();
-        $builder->updateIblock(0, function (Iblock $iblock) { /** Необходимо заменить ID инфоблока каталога */
-            $prop = $iblock->addProperty("Скидка")
+        $builder->updateIblock($iblockId, function (Iblock $iblock) {
+            $prop = $iblock->addProperty($name)
                 ->code("DISCOUNT")
                 ->sort(1000)
                 ->typeNumber();
