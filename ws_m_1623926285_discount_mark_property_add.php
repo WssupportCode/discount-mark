@@ -39,22 +39,25 @@ class ws_m_1623926285_discount_mark_property_add extends \WS\ReduceMigrations\Sc
      **/
     public function commit() {
         $iblockId = 0;      /** Необходимо заменить ID инфоблока каталога */
-        $name = "Скидка";   /** Необходимо указать наименование свойства */
 
         $builder = new IblockBuilder();
         $builder->updateIblock($iblockId, function (Iblock $iblock) {
-            $prop = $iblock->addProperty($name)
+            $prop = $iblock->addProperty("Скидка")
                 ->code("DISCOUNT")
                 ->sort(1000)
                 ->typeNumber();
         });
-        // my code
     }
 
     /**
      * Write action by rollback scenario. Use method `getData` for getting commit saved data
      **/
     public function rollback() {
-        // my code
+
+        $iblockId = 0;      /** Необходимо заменить ID инфоблока каталога */
+        $builder = new IblockBuilder();
+        $iblock = $builder->updateIblock($iblockId, function (Iblock $iblock) {
+            $iblock->deleteProperty("Скидка");
+        });
     }
 }
