@@ -1,5 +1,5 @@
 <?php
-$_SERVER["DOCUMENT_ROOT"] = realpath(dirname(__FILE__)."/..");
+$_SERVER["DOCUMENT_ROOT"] = realpath(dirname(__FILE__)."/../../../..");
 
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
 
@@ -45,8 +45,8 @@ foreach ($elements as & $element) {
 }
 
 foreach ($elements as $el) {
-    if ($el['RESULT_PRICE']["PERCENT"] > 0)
+    if ($el["PRICES"]['RESULT_PRICE']["PERCENT"] > 0)
     {
-        CIBlockElement::SetPropertyValuesEx($el["ID"], $el["IBLOCK_ID"], array("DISCOUNT" => $el['RESULT_PRICE']["PERCENT"]));
+        CIBlockElement::SetPropertyValuesEx($el["ID"], $el["IBLOCK_ID"], array("DISCOUNT" => $el["PRICES"]['RESULT_PRICE']["PERCENT"]));
     }
 }
